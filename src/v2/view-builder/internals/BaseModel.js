@@ -28,22 +28,35 @@ const convertUiSchemaFieldToProp = (uiSchemaField) => {
   return { [uiSchemaField.name]: config };
 };
 
-const create = function (remediation = {}) {
-  const value = remediation.uiSchema;
-  // NOTE: consider moving logic to uiSchemaTransformer as well.
-  const props = _.chain(value)
-    .map(convertUiSchemaFieldToProp)
-    .reduce((init, field) => {
-      return Object.assign({}, init, field);
-    })
-    .value();
+const create = function (remediation = {}, subSchemaConfig = {}) {
+  const uiSchemas = remediation.uiSchema || [];
+
+  const props = {};
+  const local = {
+    formName: 'string',
+  };
+
+  uiSchemas.forEach(schema => {
+    if (Array.isArray(schema.optionsUiSchemas)) {
+      let subSchemaIndex = 0;
+      let subSchemaValue = {};
+
+      if (_.has(subSchemaConfig, schema.name)) {
+        subSchemaValue = {value: subSchemaConfig[schema.name]};
+        subSchemaIndex = Number(subSchemaValue.value);
+      }
+      schema.optionsUiSchemas[subSchemaIndex].forEach(subSchema => {
+        Object.assign(props, convertUiSchemaFieldToProp(subSchema));
+      });
+      Object.assign(local, convertUiSchemaFieldToProp(Object.assign({}, schema, subSchemaValue)));
+    } else {
+      Object.assign(props, convertUiSchemaFieldToProp(schema));
+    }
+  });
 
   const BaseModel = Model.extend({
     props,
-
-    local: {
-      formName: 'string',
-    },
+    local,
   });
 
   return BaseModel;

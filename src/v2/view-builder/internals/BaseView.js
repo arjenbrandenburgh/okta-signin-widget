@@ -31,6 +31,7 @@ export default View.extend({
       selector : '.siw-main-body',
       options: {
         model,
+        subSchemaConfig: this.options.subSchemaConfig
       },
     });
     this.add(this.Footer, { selector : '.siw-main-footer' });
@@ -44,11 +45,10 @@ export default View.extend({
       appState.trigger('invokeAction', 'select-enroll-profile');
       return false;
     });
-
   },
 
   createModelClass () {
-    return BaseModel.create(this.options.currentViewState);
+    return BaseModel.create(this.options.currentViewState, this.options.subSchemaConfig);
   }
 
 });

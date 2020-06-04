@@ -24,6 +24,7 @@ export default Controller.extend({
     this.listenTo(this.options.appState, 'invokeAction', this.invokeAction);
     this.listenTo(this.options.appState, 'switchForm', this.switchForm);
     this.listenTo(this.options.appState, 'saveForm', this.handleFormSave);
+    this.listenTo(this.options.appState, 'switchSubSchema', this.handleSwitchSubSchema);
   },
 
   preRender () {
@@ -40,10 +41,15 @@ export default Controller.extend({
     this.formView = this.add(TheView, {
       options: {
         currentViewState,
+        subSchemaConfig: this.subSchemaConfig || {},
       }
     }).last();
 
     this.listenTo(this.formView, 'save', this.handleFormSave);
+  },
+  handleSwitchSubSchema (modelValues) {
+    this.subSchemaConfig = modelValues;
+    this.render();
   },
 
   invokeAction (actionPath = '') {

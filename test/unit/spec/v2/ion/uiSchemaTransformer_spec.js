@@ -57,7 +57,7 @@ describe('v2/ion/uiSchemaTransformer', function () {
             'value':[
               {
                 'name':'factorId',
-                'type':'set',
+                'type':'string',
                 'options':[
                   {
                     'label':'Password',
@@ -113,7 +113,7 @@ describe('v2/ion/uiSchemaTransformer', function () {
             'value':[
               {
                 'name':'factorProfileId',
-                'type':'set',
+                'type':'string',
                 'options':[
                   {
                     'label':'Password Label',
@@ -487,7 +487,23 @@ describe('v2/ion/uiSchemaTransformer', function () {
                         ]
                       }
                     }
-                  }
+                  },
+                  {
+                    'label': 'Okta Security Question',
+                    'value': {
+                      'form': {
+                        'value': [
+                          {
+                            'name': 'id',
+                            'value': 'aid568g3mXgtID0X1GGG',
+                            'required': true,
+                            'mutable': false,
+                            'visible': false
+                          }
+                        ]
+                      }
+                    }
+                  },
                 ]
               }
             ],
@@ -519,6 +535,13 @@ describe('v2/ion/uiSchemaTransformer', function () {
                     },
                     'authenticatorType': 'webauthn'
                   },
+                  {
+                    'label': 'Okta Security Question',
+                    'value': {
+                      'id': 'aid568g3mXgtID0X1GGG'
+                    },
+                    'authenticatorType': 'security_question'
+                  },
                 ]
               }
             ]
@@ -536,7 +559,6 @@ describe('v2/ion/uiSchemaTransformer', function () {
         'currentAuthenticator': {
           'type': 'phone',
           'id': 'aid568g3mXgtID0X1SLH',
-          'name': 'Okta Phone'
         },
         'user': {
           'id': 'I9bvFiq01cRFgbn',
