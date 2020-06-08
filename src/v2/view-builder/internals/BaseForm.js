@@ -1,4 +1,4 @@
-import { Form, loc, createCallout, _ } from 'okta';
+import { Form, loc, createCallout } from 'okta';
 import FormInputFactory from './FormInputFactory';
 
 export default Form.extend({
@@ -25,13 +25,6 @@ export default Form.extend({
     });
 
     this.listenTo(this, 'save', this.saveForm);
-    _.each(this.model.attributes, (value, key) => {
-      if (key.match(/__[^ ]+__/)) {
-        this.listenTo(this.model, `change:${key}`, (model, newValue) => {
-          this.options.appState.trigger('switchSubSchema', {[key]: newValue});
-        });
-      }
-    });
   },
 
   saveForm (model) {
@@ -61,8 +54,11 @@ export default Form.extend({
     }
 
     if (Array.isArray(input.optionsUiSchemas)) {
-      const subSchemaIndex = Number(this.options.subSchemaConfig[input.name]) || 0;
-      input.optionsUiSchemas[subSchemaIndex].forEach(this.addInputOrView.bind(this));
+      if (this.options.subSchemaConfig[input.name]) {
+        const subSchemaIndex = Number(this.options.subSchemaConfig[input.name]);
+        const subSchemas = input.optionsUiSchemas[subSchemaIndex] || [];
+        subSchemas.forEach(this.addInputOrView.bind(this));
+      }
     }
   },
 

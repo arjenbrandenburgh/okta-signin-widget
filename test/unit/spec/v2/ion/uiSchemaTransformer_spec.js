@@ -26,6 +26,8 @@ describe('v2/ion/uiSchemaTransformer', function () {
             'href': 'http://localhost:3000/idp/idx/challenge/answer',
             'name':'challenge-factor',
             'method':'POST',
+            'rel': [ 'create-form' ],
+            'accepts': 'application/vnd.okta.v1+json',
             'action': jasmine.any(Function),
             'value':[
               {
@@ -38,6 +40,13 @@ describe('v2/ion/uiSchemaTransformer', function () {
                     },
                   ]
                 }
+              },
+              {
+                name: 'stateHandle',
+                required: true,
+                value: '02WTSGqlHUPjoYvorz8T48txBIPe3VUisrQOY4g5N8',
+                visible: false,
+                mutable: false
               }
             ],
             'uiSchema':[
@@ -53,6 +62,8 @@ describe('v2/ion/uiSchemaTransformer', function () {
             'href': 'http://localhost:3000/idp/idx/challenge',
             'name':'select-factor-authenticate',
             'method':'POST',
+            'rel': [ 'create-form' ],
+            'accepts': 'application/vnd.okta.v1+json',
             'action': jasmine.any(Function),
             'value':[
               {
@@ -70,6 +81,13 @@ describe('v2/ion/uiSchemaTransformer', function () {
                     'factorType':'email'
                   }
                 ]
+              },
+              {
+                name: 'stateHandle',
+                required: true,
+                value: '02h50hMLvmuZUuoKCShHKZytlDeFRnn8KG-rcd8Ay5',
+                visible: false,
+                mutable: false
               }
             ],
             'uiSchema':[
@@ -108,6 +126,8 @@ describe('v2/ion/uiSchemaTransformer', function () {
           {
             'href': 'http://localhost:3000/idp/idx/credential/enroll',
             'name':'select-factor-enroll',
+            'rel': [ 'create-form' ],
+            'accepts': 'application/vnd.okta.v1+json',
             'method':'POST',
             'action': jasmine.any(Function),
             'value':[
@@ -126,6 +146,11 @@ describe('v2/ion/uiSchemaTransformer', function () {
                     'factorType':'email'
                   }
                 ]
+              },
+              {
+                name: 'stateHandle',
+                value: '01OCl7uyAUC4CUqHsObI9bvFiq01cRFgbnpJQ1bz82',
+                visible: false
               }
             ],
             'uiSchema':[
@@ -163,6 +188,8 @@ describe('v2/ion/uiSchemaTransformer', function () {
             'href': 'http://localhost:3000/idp/idx/enroll',
             'name':'enroll-profile',
             'method':'POST',
+            'rel': [ 'create-form' ],
+            'accepts': 'application/vnd.okta.v1+json',
             'action': jasmine.any(Function),
             'value':[
               {
@@ -186,6 +213,11 @@ describe('v2/ion/uiSchemaTransformer', function () {
                     }
                   ],
                 },
+              },
+              {
+                name: 'stateHandle',
+                value: '01OCl7uyAUC4CUqHsObI9bvFiq01cRFgbnpJQ1bz82',
+                visible: false
               }
             ],
             'uiSchema':[
@@ -215,12 +247,19 @@ describe('v2/ion/uiSchemaTransformer', function () {
           {
             'href': 'http://localhost:3000/idp/idx/identify',
             'name':'select-identify',
+            'rel': [ 'create-form' ],
+            'accepts': 'application/vnd.okta.v1+json',
             'method': 'POST',
             'action': jasmine.any(Function),
             'value':[
               {
                 'name':'identifier',
                 'label':'identifier',
+              },
+              {
+                name: 'stateHandle',
+                value: '01r2p5S9qaAjESMFuPzt7r3ZMcZZQ_vvS0Tzg56ajB',
+                visible: false
               }
             ],
             'uiSchema':[
@@ -251,6 +290,8 @@ describe('v2/ion/uiSchemaTransformer', function () {
           {
             'name': 'challenge-authenticator',
             'href': 'http://localhost:3000/idp/idx/challenge/answer',
+            'rel': [ 'create-form' ],
+            'accepts': 'application/vnd.okta.v1+json',
             'method': 'POST',
             'action': jasmine.any(Function),
             'value': [
@@ -265,6 +306,11 @@ describe('v2/ion/uiSchemaTransformer', function () {
                     }
                   ]
                 }
+              },
+              {
+                name: 'stateHandle', required: true,
+                value: '02WTSGqlHUPjoYvorz8T48txBIPe3VUisrQOY4g5N8',
+                visible: false, mutable: false
               }
             ],
             'uiSchema': [
@@ -284,6 +330,8 @@ describe('v2/ion/uiSchemaTransformer', function () {
             'name': 'select-authenticator-authenticate',
             'href': 'http://localhost:3000/idp/idx/challenge',
             'method': 'POST',
+            'rel': [ 'create-form' ],
+            'accepts': 'application/vnd.okta.v1+json',
             'action': jasmine.any(Function),
             'value': [
               {
@@ -357,6 +405,12 @@ describe('v2/ion/uiSchemaTransformer', function () {
                     }
                   }
                 ]
+              },
+              {
+                name: 'stateHandle',
+                required: true,
+                value: '02WTSGqlHUPjoYvorz8T48txBIPe3VUisrQOY4g5N8',
+                visible: false, mutable: false
               }
             ],
             'uiSchema': [
@@ -408,6 +462,8 @@ describe('v2/ion/uiSchemaTransformer', function () {
           {
             'name': 'select-authenticator-enroll',
             'href': 'http://localhost:3000/idp/idx/credential/enroll',
+            'rel': [ 'create-form' ],
+            'accepts': 'application/vnd.okta.v1+json',
             'method': 'POST',
             'action': jasmine.any(Function),
             'value': [
@@ -505,6 +561,13 @@ describe('v2/ion/uiSchemaTransformer', function () {
                     }
                   },
                 ]
+              },
+              {
+                name: 'stateHandle',
+                required: true,
+                value: '02CqFbzJ_zMGCqXut-1CNXfafiTkh9wGlbFqi9Xupt',
+                visible: false,
+                mutable: false
               }
             ],
             'uiSchema': [
@@ -575,6 +638,8 @@ describe('v2/ion/uiSchemaTransformer', function () {
           {
             'name': 'select-authenticator-enroll-data',
             'href': 'http://localhost:3000/idp/idx/challenge',
+            'rel': [ 'create-form' ],
+            'accepts': 'application/vnd.okta.v1+json',
             'method': 'POST',
             'action': jasmine.any(Function),
             'value': [
@@ -616,6 +681,11 @@ describe('v2/ion/uiSchemaTransformer', function () {
                     ]
                   }
                 }
+              },
+              {
+                name: 'stateHandle',
+                value: '01OCl7uyAUC4CUqHsObI9bvFiq01cRFgbnpJQ1bz82',
+                visible: false
               }
             ],
             'uiSchema': [
@@ -666,6 +736,8 @@ describe('v2/ion/uiSchemaTransformer', function () {
           {
             'name':'identify',
             'href':'http://localhost:3000/idp/idx/identify',
+            'rel': [ 'create-form' ],
+            'accepts': 'application/vnd.okta.v1+json',
             'method':'POST',
             'action': jasmine.any(Function),
             'value':[
@@ -677,6 +749,13 @@ describe('v2/ion/uiSchemaTransformer', function () {
                 'name':'rememberMe',
                 'label':'Remember Me',
                 'type':'boolean'
+              },
+              {
+                name: 'stateHandle',
+                required: true,
+                value: jasmine.any(String),
+                visible: false,
+                mutable: false
               }
             ],
             'uiSchema':[
@@ -700,9 +779,19 @@ describe('v2/ion/uiSchemaTransformer', function () {
           {
             'name':'select-enroll-profile',
             'href':'http://localhost:3000/idp/idx/enroll',
+            'rel': [ 'create-form' ],
+            'accepts': 'application/vnd.okta.v1+json',
             'method':'POST',
             'action': jasmine.any(Function),
-            'value':[],
+            'value':[
+              {
+                name: 'stateHandle',
+                required: true,
+                value: jasmine.any(String),
+                visible: false,
+                mutable: false
+              }
+            ],
             'uiSchema':[]
           }
         ],

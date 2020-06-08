@@ -5,8 +5,8 @@ const idx = {
 
   '/idp/idx/introspect': [
     // 'authenticator-select-verify-options',
-    'authenticator-select-enroll-options',
-    // 'authenticator-enroll-security-question',
+    // 'authenticator-select-enroll-options',
+    'authenticator-enroll-security-question',
     // 'terminal-return-expired-email',
     // 'identify',
     // 'identify-locked-user'

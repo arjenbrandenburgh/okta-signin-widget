@@ -9,7 +9,7 @@
  *
  * See the License for the specific language governing permissions and limitations under the License.
  */
-import { _, Model} from 'okta';
+import { _, Model } from 'okta';
 
 // change the param to uiSchemaField instead..
 const convertUiSchemaFieldToProp = (uiSchemaField) => {
@@ -28,31 +28,55 @@ const convertUiSchemaFieldToProp = (uiSchemaField) => {
   return { [uiSchemaField.name]: config };
 };
 
-const create = function (remediation = {}, subSchemaConfig = {}) {
-  const uiSchemas = remediation.uiSchema || [];
+const createPropsAndLocals = function (
+  remediation = {},
+  subSchemaConfig = {},
+  props = {},
+  local = {}) {
 
-  const props = {};
-  const local = {
-    formName: 'string',
-  };
+  const uiSchemas = remediation.uiSchema || [];
 
   uiSchemas.forEach(schema => {
     if (Array.isArray(schema.optionsUiSchemas)) {
-      let subSchemaIndex = 0;
+      let subSchemaIndex;
       let subSchemaValue = {};
 
-      if (_.has(subSchemaConfig, schema.name)) {
+      if (Number(schema.value) >= 0) {
+        subSchemaIndex = schema.value;
+      }
+      if (subSchemaConfig[schema.name]) {
         subSchemaValue = {value: subSchemaConfig[schema.name]};
         subSchemaIndex = Number(subSchemaValue.value);
       }
-      schema.optionsUiSchemas[subSchemaIndex].forEach(subSchema => {
-        Object.assign(props, convertUiSchemaFieldToProp(subSchema));
-      });
-      Object.assign(local, convertUiSchemaFieldToProp(Object.assign({}, schema, subSchemaValue)));
+
+      Object.assign(
+        local,
+        convertUiSchemaFieldToProp(Object.assign({}, schema, subSchemaValue)));
+
+      if (subSchemaIndex) {
+        createPropsAndLocals(
+          { uiSchema: schema.optionsUiSchemas[subSchemaIndex] },
+          subSchemaConfig,
+          props,
+          local,
+        );
+      }
     } else {
       Object.assign(props, convertUiSchemaFieldToProp(schema));
     }
   });
+};
+
+const create = function (remediation = {}, subSchemaConfig = {}) {
+  const props = {};
+  const local = {
+    formName: 'string',
+  };
+  createPropsAndLocals(
+    remediation,
+    subSchemaConfig,
+    props,
+    local);
 
   const BaseModel = Model.extend({
     props,

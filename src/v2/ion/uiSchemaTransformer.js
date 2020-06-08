@@ -122,6 +122,7 @@ const createUISchema = (transformedResp, remediationForm) => {
   // back to object hierarchy through `Model.toJSON`.
   // For simplicity we are assuming that when field itself is a form its only one level deep.
   const remediationValue = _.chain(remediationForm.value || [])
+    .filter(v => v.visible !== false)
     .map(v => {
       // `v.form` is probably not right structure but `v.value.form`
       // TODO: clean up after API stablization.
@@ -213,7 +214,7 @@ const createUISchema = (transformedResp, remediationForm) => {
         // assume (default to) use radio buttons to switch sub-schema.
         uiSchema.type = 'radio';
         uiSchema.value = '0';
-        uiSchema.name = `__${ionFormField.name}__`;
+        uiSchema.name = `sub_schema_local_${ionFormField.name}`;
       }
     }
 

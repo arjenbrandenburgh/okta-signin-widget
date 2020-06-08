@@ -12,6 +12,7 @@
           "create-form"
         ],
         "name": "select-factor-enroll",
+        "accepts": "application/vnd.okta.v1+json",
         "href": "http://localhost:3000/idp/idx/credential/enroll",
         "method": "POST",
         "value": [
