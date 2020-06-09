@@ -6,10 +6,12 @@ const idx = {
   '/idp/idx/introspect': [
     // 'authenticator-select-verify-options',
     // 'authenticator-select-enroll-options',
-    'identify',
+    'identify'
+    // 'authenticator-select-enroll-optional',
     // 'identify-locked-user'
     // 'factor-verification-email'
   ],
+  '/idp/idx/skip': ['success'],
   '/idp/idx': [
     'select-factor-authenticate'
   ],
